@@ -3,7 +3,7 @@
 This repo is learning project designed to help Rubyists learn TDD. In this project, you'll implement a cron expression parser program that uses the standard syntax. You will not have to implement special rules like '@yearly' The parser will have the following usage:
 
 ```bash
-ruby main.rb */15 3 5 1-12 * /usr/local/bin/program
+$ ruby main.rb */15 3 5 1-12 * /usr/local/bin/program
 ```
 To break down the command arguments:
 - argument 1 is the minutes
@@ -38,18 +38,28 @@ The goal of this project is to become more comfortable with following correct TD
 At this stage, we want to create a test that is failing. We should think about the flow we want our progam to have and how we expect things to work. There is a common misconception that any test you write cannot change. This is wrong and does not reflect the reality that programmers face when working on real code. But, the test should be written first and contain your best guess at the functionality you are trying to implement.
 
 ### Green
-At this stage, the code works. Your test is passing and all looks good. Many programmers stop here. This is wrong. The code at this point may work fine and be performant. But, Ruby has many tools that can make code much more idiomatic and simple. We should move onto the next stage once things are working...
+At this stage, the code works. Your test is passing and all looks good. Many programmers stop here. This is wrong. The code at this point may work fine and be performant. But, Ruby has many tools that can make code much more idiomatic and simple. We should move onto the next stage once things are working to make things better...
 
 ### Refactor
 At this stage, we look at the code and the functionality we have implemented and do our best to understand if there is a better way to approach it. Is the implementation we've come up with perfect? (*spoiler* probably not)
 
 We should understand the exact flow we are following in our code and look to ensure that it is clear and concise. A common misconception here is that you cannot change the test, again, this is wrong. If while we are refactoring we come across a need to change direction, we should. We can even add more tests! Which... puts us right back in **Red** to start the workflow again.
 
-
-
-
 ## Setup
+Running bundle install will install all the gems needed to complete the project
+```bash
+$ bundle install
+```
+We can run the tests with
+```bash
+$ rake test
+```
+We can check linting with
+```bash
+$ rake rubocop
+```
 
 ## Tasks
+1. 
 
 
