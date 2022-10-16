@@ -3,9 +3,9 @@
 module RbCronParser
   module Chronunits
     DAY = 30
-    MIN = 60
-    HOUR = 24
-    SEC = 60
+    MIN = 59 # inclusive of 0
+    HOUR = 23 # inclusive of 0
+    SEC = 59 # inlcusive of 0
     MONTH = 12
   end
 end

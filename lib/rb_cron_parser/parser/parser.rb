@@ -2,6 +2,7 @@
 
 require_relative './rules'
 require_relative './chronounits'
+require 'pry'
 
 module RbCronParser
   # Module to parse cron fragments into possible values
@@ -21,8 +22,6 @@ module RbCronParser
         # save these into the hash and return
         cron
       end
-
-      private
 
       # Run cronlet through a set of regex rules to verify which it statisfies
       # Once identified, use the matching func to process vals

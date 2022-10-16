@@ -1,7 +1,7 @@
 #!/usr/local/bin/ruby -w
 # frozen_string_literal: true
 
-require_relative './lib/rb_cron_parser'
+require './lib/rb_cron_parser'
 
 input = ARGV.join(' ').split(' ')
 

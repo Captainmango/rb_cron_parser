@@ -1,6 +1,9 @@
 AllCops:
-  TargetRubyVersion: 2.6
+  # Best version to pin against as is the most stable generally
+  TargetRubyVersion: 2.7
 
+# Single quote strings are char arrays under the hood.
+# Still considered strings really, but better on memory
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
@@ -9,5 +12,10 @@ Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
 
+# Turned off for table driven testing. Generally a good idea to have on
+Metrics/BlockLength:
+  Enabled: false
+
+# Purely style related, but line lengths in Ruby aren't generally this long
 Layout/LineLength:
   Max: 120
