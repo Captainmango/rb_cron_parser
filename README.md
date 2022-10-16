@@ -69,7 +69,7 @@ The test dir structure matches what is in the lib dir for ease of use. When addi
 
 ### Add tests for the Cron class
 
-The Cron class is designed to take in the input from the terminal and make it simple for us to pass to our working code. It currently works fine, but the fact it inherits from Struct means we have a bigger public interface than is really needed. We should pin down the functionality we actually need in tests, the refactor the class so we know *exactly* what methods Cron has.
+The Cron class is designed to take in the input from the terminal and make it simple for us to pass to our working code. It currently works fine, but the fact it is a Struct means we have a bigger public interface than is really needed. We should pin down the functionality we actually need in tests, then refactor the class so we know *exactly* what methods Cron has.
 - Write tests to confirm we have the ability to read the properties: 
     - minute
     - hour

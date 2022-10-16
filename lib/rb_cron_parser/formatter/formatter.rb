@@ -7,9 +7,11 @@ module RbCronParser
   module Formatter
     class << self
       def format(cron_details)
-        # iterate over the hash and print key (the interval) then value
-        # (array of values that fit expression)
-        puts cron_details
+        raise ArgumentError('Formatter#format only accepts hashes') unless cron_details.is_a? Hash
+
+        cron_details.each_pair do |key, value|
+          puts "#{key} #{value}"
+        end
       end
     end
   end

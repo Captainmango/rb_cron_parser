@@ -1,3 +1,4 @@
+# frozen_string_literal: true
+
 # Value object containing cronpieces
-class Cron < Struct.new(:minute, :hour, :day_of_month, :month, :day_of_week, :file)
-end
+Cron = Struct.new(:minute, :hour, :day_of_month, :month, :day_of_week, :file)

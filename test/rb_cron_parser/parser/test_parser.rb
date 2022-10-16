@@ -8,13 +8,13 @@ module RbCronParser
     class ParserTest < Minitest::Spec
       describe 'RbCronParser::Parser#identify_rule' do
         it 'Can identify wildcards' do
-          res = RbCronParser::Parser::identify_rule('*')
+          res = RbCronParser::Parser.identify_rule('*')
 
           expect(res).must_equal :wildcard
         end
 
         it 'Can identify ranges' do
-          res = RbCronParser::Parser::identify_rule('1-5')
+          res = RbCronParser::Parser.identify_rule('1-5')
 
           expect(res).must_equal :range
         end
@@ -31,7 +31,7 @@ module RbCronParser
               day_of_month: [3],
               month: [4],
               day_of_week: [5],
-              command: nil,
+              command: nil
             }
           },
           {
@@ -43,9 +43,9 @@ module RbCronParser
               day_of_month: [*1..RbCronParser::IntervalTotal::DAY_OF_MONTH],
               month: [*1..RbCronParser::IntervalTotal::MONTH],
               day_of_week: [*1..RbCronParser::IntervalTotal::DAY_OF_WEEK],
-              command: nil,
+              command: nil
             }
-          },
+          }
         ]
 
         tests.each do |test_case|

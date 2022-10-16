@@ -2,8 +2,7 @@ AllCops:
   # Best version to pin against as is the most stable generally
   TargetRubyVersion: 2.7
 
-# No difference perf wise on singles or doubles
-# But we are using regex so singles are easier to use as no need to escape slashes
+# No difference perf wise on singles or doubles, purely visual
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: single_quotes
@@ -14,6 +13,10 @@ Style/StringLiteralsInInterpolation:
 
 # Turned off for table driven testing. Generally a good idea to have on
 Metrics/BlockLength:
+  Enabled: false
+
+# Turned off as it's crying about something that makes no sense
+Metrics/AbcSize:
   Enabled: false
 
 # Purely style related, but line lengths in Ruby aren't generally this long
