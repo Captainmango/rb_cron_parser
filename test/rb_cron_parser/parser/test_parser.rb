@@ -35,7 +35,7 @@ module RbCronParser
         ]
 
         tests.each do |test_case|
-          it "#{test_case[:scenario]} input: #{test_case[:input]}" do
+          it "#{test_case[:scenario]} #{test_case[:input]}" do
             skip('Remove when writing functionality')
             cron = Cron.new(*test_case[:input])
             output = RbCronParser::Parser.parse(cron)
