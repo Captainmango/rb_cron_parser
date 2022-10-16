@@ -21,7 +21,7 @@ module RbCronParser
         # apply the rule that returns an array of values
         # save these into the hash and return
         res = {
-          minute: [*self.send(identify_rule(cron.minute), cron.minute, IntervalTotal::MIN)]
+          minute: [*self.send(identify_rule(cron.minute), cron.minute, IntervalTotal::MINUTE)]
         }
  
         res

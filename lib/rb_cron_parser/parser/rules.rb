@@ -11,8 +11,8 @@ module RbCronParser
     # just a star (*) - returns all the possible values for the interval
     def wildcard(cronlet, chronounit)
       case chronounit
-      in IntervalTotal::MIN
-        return 0..IntervalTotal::MIN
+      in IntervalTotal::MINUTE
+        return 0..IntervalTotal::MINUTE
       else
         return nil
       end
