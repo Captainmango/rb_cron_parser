@@ -13,7 +13,7 @@ To break down the command arguments:
 - argument 5 is the day of the week the cron job will run
 - argument 6 is the filepath to the script or file to be executed
 
-The program will print to STDOUT a table that should look something like this:
+The program will print to STDOUT a table that should look something like this (don't worry if the formatting isn't perfect, as long as each interval is on a new line that's a pass):
 
 ```bash
 minute        0,15,30,45
@@ -58,8 +58,50 @@ We can check linting with
 ```bash
 $ rake rubocop
 ```
+We can run the project with
+```bash
+$ ruby main.rb [ARGUMENTS HERE]
+```
+If you'd like to debug something, Pry is installed already. Please insert `binding.pry` where you would like to set a breakpoint and run the project or a test to halt there.
 
 ## Tasks
-1. 
+The test dir structure matches what is in the lib dir for ease of use. When adding or editing tests, please add these to the respective files.
+
+### Add tests for the Cron class
+
+The Cron class is designed to take in the input from the terminal and make it simple for us to pass to our working code. It currently works fine, but the fact it inherits from Struct means we have a bigger public interface than is really needed. We should pin down the functionality we actually need in tests, the refactor the class so we know *exactly* what methods Cron has.
+- Write tests to confirm we have the ability to read the properties: 
+    - minute
+    - hour
+    - day_of_month
+    - month
+    - day_of_week
+    - file
+
+- Write a test to confirm we can pass an array into the constructor
+    - The constructor should take each item from the array and assign to each of the variables in the following order:
+        - minute
+        - hour
+        - day_of_month
+        - month
+        - day_of_week
+        - file
+
+- Refactor Cron so that only the functionality we have tests for is present
+    - Add a constructor (initialize)
+    - Add getters for all of the properties
+
+### Implement Formatter#format
+The Formatter module is what is going to handle printing out the parsed cron expression. It's going to take in a hash and print out the key value pairs on new lines. As such, we should make sure our hash has the correct keys before we try to print things out.
+
+Because we have a class for our Cron Expression, that we intend to convert into a hash, that *will* ensure the respective properties always exist, there shouldn't be a problem. But, what if somehow something else we don't expect is passed to format? That would be a pretty bad bug. Tests don't prove that bugs aren't there, actually quite the opposite. We should test that if we try to format something we don't want that our program errors out
+
+- Write tests for the formatter
+    - It should accept a hash and print each key and value pair on a new line
+    - It should raise an ArgumentError if anything other than a hash is given
+- Implement the Formatter#format functionality
+- Refactor Formatter#format
+    - Is what you've got the easiest to read?
+        - What could make it simpler, is there a method that simply returns the keys and their related values? (Formatting isn't a major concern)
 
 
