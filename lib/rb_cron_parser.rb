@@ -2,3 +2,4 @@
 
 require_relative './rb_cron_parser/parser/parser'
 require_relative './rb_cron_parser/formatter/formatter'
+require_relative './rb_cron_parser/cron'

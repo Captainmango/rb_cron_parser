@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './rules'
-require_relative './chronounits'
+require_relative './interval_total'
 require 'pry'
 
 module RbCronParser
@@ -11,7 +11,7 @@ module RbCronParser
   module Parser
     class << self
       include RbCronParser::Rules
-      include RbCronParser::Chronunits
+      include RbCronParser::IntervalTotal
 
       # returns hash for each interval with the applicable periods
       def parse(cron)

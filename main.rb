@@ -7,9 +7,8 @@ input = ARGV.join(' ').split(' ')
 
 raise ArgumentError, 'Incorrect size cron passed in' if input.length > 5
 
-cron_struct = Struct.new(:day, :month, :hour, :minute, :second)
-my_cron_struct = cron_struct.new(*input)
+cron = Cron.new(*input)
 
 RbCronParser::Formatter.format(
-  RbCronParser::Parser.parse(my_cron_struct)
+  RbCronParser::Parser.parse(cron)
 )

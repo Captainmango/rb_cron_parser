@@ -7,29 +7,28 @@ module RbCronParser
   module Parser
     class ParserTest < Minitest::Spec
       describe 'RbCronParser::Parser#parse' do
-        cron_struct = Struct.new(:day, :month, :hour, :minute, :second)
-
         tests = [
           {
             scenario: 'Can parse basic input',
             input: [1, 2, 3, 4, 5],
             expected: {
-              day: [1],
-              month: [2],
-              hour: [3],
-              minute: [4],
-              second: [5]
+              minute: [1],
+              hour: [2],
+              day_of_month: [3],
+              month: [4],
+              day_of_week: [5],
+              command: nil
             }
           },
           {
             scenario: 'Can parse wildcards',
             input: ['*', '*', '*', '*', '*'],
             expected: {
-              day: [*1..30],
-              month: [*1..12],
-              hour: [*0..23],
               minute: [*0..59],
-              second: [*0..59]
+              hour: [*0..23],
+              day_of_month: [*1..30],
+              month: [*1..12],
+              day_of_week: [*1..7]
             }
           },
           {
@@ -70,7 +69,7 @@ module RbCronParser
         tests.each do |test_case|
           it "#{test_case[:scenario]} input: #{test_case[:input]}" do
             skip('Remove when writing functionality')
-            cron = cron_struct.new(*test_case[:input])
+            cron = Cron.new(*test_case[:input])
             output = RbCronParser::Parser.parse(cron)
 
             expect(output).must_equal test_case[:expected]
