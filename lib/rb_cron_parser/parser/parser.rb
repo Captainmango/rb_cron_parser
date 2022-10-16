@@ -16,11 +16,11 @@ module RbCronParser
       # returns hash for each interval with the applicable periods
       def parse(cron)
         {
-          minute: [*send(identify_rule(cron.minute), cron.minute, IntervalTotal::MINUTE)],
-          hour: [*send(identify_rule(cron.hour), cron.hour, IntervalTotal::HOUR)],
-          day_of_month: [*send(identify_rule(cron.day_of_month), cron.day_of_month, IntervalTotal::DAY_OF_MONTH)],
-          month: [*send(identify_rule(cron.month), cron.month, IntervalTotal::MONTH)],
-          day_of_week: [*send(identify_rule(cron.day_of_week), cron.day_of_week, IntervalTotal::DAY_OF_WEEK)],
+          minute: parse_data(cron.minute, IntervalTotal::MINUTE),
+          hour: parse_data(cron.hour, IntervalTotal::HOUR),
+          day_of_month: parse_data(cron.day_of_month, IntervalTotal::DAY_OF_MONTH),
+          month: parse_data(cron.month, IntervalTotal::MONTH),
+          day_of_week: parse_data(cron.day_of_week, IntervalTotal::DAY_OF_WEEK),
           file: cron.file
         }
       end
@@ -36,6 +36,12 @@ module RbCronParser
         else
           :default
         end
+      end
+
+      private
+
+      def parse_data(cronlet, chronounit)
+        [*send(identify_rule(cronlet), cronlet, chronounit)]
       end
     end
   end

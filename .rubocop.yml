@@ -15,10 +15,6 @@ Style/StringLiteralsInInterpolation:
 Metrics/BlockLength:
   Enabled: false
 
-# Turned off as it's crying about something that makes no sense
-Metrics/AbcSize:
-  Enabled: false
-
 # Purely style related, but line lengths in Ruby aren't generally this long
 Layout/LineLength:
   Max: 120
