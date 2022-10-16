@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
-require "rb_cron_parser"
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
+require 'rb_cron_parser'
 
-require "minitest/autorun"
+require 'minitest/autorun'
