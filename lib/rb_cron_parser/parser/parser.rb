@@ -13,20 +13,23 @@ module RbCronParser
       include RbCronParser::Rules
       include RbCronParser::IntervalTotal
 
-      # returns hash for each interval with the applicable periods
+      # Converts the cron object into a collection of parsed intervals with rules applied
+      #
+      # Returns a hash
       def parse(cron)
         {
-          minute: parse_data(cron.minute, IntervalTotal::MINUTE),
-          hour: parse_data(cron.hour, IntervalTotal::HOUR),
-          day_of_month: parse_data(cron.day_of_month, IntervalTotal::DAY_OF_MONTH),
-          month: parse_data(cron.month, IntervalTotal::MONTH),
-          day_of_week: parse_data(cron.day_of_week, IntervalTotal::DAY_OF_WEEK),
+          minute: parse_interval(cron.minute, IntervalTotal::MINUTE),
+          hour: parse_interval(cron.hour, IntervalTotal::HOUR),
+          day_of_month: parse_interval(cron.day_of_month, IntervalTotal::DAY_OF_MONTH),
+          month: parse_interval(cron.month, IntervalTotal::MONTH),
+          day_of_week: parse_interval(cron.day_of_week, IntervalTotal::DAY_OF_WEEK),
           file: cron.file
         }
       end
 
-      # Run cronlet through a set of regex rules to verify which it statisfies
-      # Once identified, use the matching func to process vals
+      # Identifies what rule to apply to the cron fragment
+      #
+      # Returns a symbol
       def identify_rule(cronlet)
         case cronlet
         in /(^\*$)/
@@ -40,7 +43,10 @@ module RbCronParser
 
       private
 
-      def parse_data(cronlet, chronounit)
+      # Accepts cron fragment and interval and applies identified rule
+      #
+      # Returns an array
+      def parse_interval(cronlet, chronounit)
         [*send(identify_rule(cronlet), cronlet, chronounit)]
       end
     end
