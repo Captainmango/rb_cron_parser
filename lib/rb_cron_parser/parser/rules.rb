@@ -1,12 +1,22 @@
 # frozen_string_literal: true
 
+require_relative './interval_total'
+
 module RbCronParser
   # Module containing rules for processing cron fragments
   #
   # Author: Edward Heaver
   module Rules
+    include RbCronParser::IntervalTotal
     # just a star (*) - returns all the possible values for the interval
-    def wildcard(cronlet, chronounit); end
+    def wildcard(cronlet, chronounit)
+      case chronounit
+      in IntervalTotal::MIN
+        return 0..IntervalTotal::MIN
+      else
+        return nil
+      end
+    end
 
     # 2 numbers with a dash between (1-3) - returns all values between nums inclusive
     def range(cronlet, chronounit); end
@@ -19,6 +29,8 @@ module RbCronParser
     def list(cronlet, chronounit); end
 
     # default rule (1) - returns the value passed in. Returns empty array if value is nil
-    def default(cronlet, chronounit); end
+    def default(cronlet, chronounit)
+      cronlet.to_i
+    end
   end
 end

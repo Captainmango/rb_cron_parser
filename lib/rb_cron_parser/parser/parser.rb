@@ -20,13 +20,24 @@ module RbCronParser
         # if no match is found throw error
         # apply the rule that returns an array of values
         # save these into the hash and return
-        cron
+        res = {
+          minute: [*self.send(identify_rule(cron.minute), cron.minute, IntervalTotal::MIN)]
+        }
+ 
+        res
       end
 
       # Run cronlet through a set of regex rules to verify which it statisfies
       # Once identified, use the matching func to process vals
-      def identify_rule(cronlet, chronounit)
-        # Probs going to use pattern matching as it makes sense
+      def identify_rule(cronlet)
+        case true
+        when /(^\*$)/.match?(cronlet)
+          return :wildcard
+        when /(^\d{1,2}-\d{1,2}$)/.match?(cronlet)
+          return :range
+        else
+          return :default
+        end
       end
     end
   end

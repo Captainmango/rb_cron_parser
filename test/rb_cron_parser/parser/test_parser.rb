@@ -6,6 +6,20 @@ require 'rb_cron_parser'
 module RbCronParser
   module Parser
     class ParserTest < Minitest::Spec
+      describe 'RbCronParser::Parser#identify_rule' do
+        it 'Can identify wildcards' do
+          res = RbCronParser::Parser::identify_rule('*')
+
+          expect(res).must_equal :wildcard
+        end
+
+        it 'Can identify ranges' do
+          res = RbCronParser::Parser::identify_rule('1-5')
+
+          expect(res).must_equal :range
+        end
+      end
+
       describe 'RbCronParser::Parser#parse' do
         tests = [
           {
