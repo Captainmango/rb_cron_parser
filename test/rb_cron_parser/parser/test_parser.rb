@@ -31,7 +31,7 @@ module RbCronParser
               day_of_month: [3],
               month: [4],
               day_of_week: [5],
-              command: nil
+              file: nil
             }
           },
           {
@@ -47,13 +47,11 @@ module RbCronParser
             }
           }
         ]
-
-        tests.each do |test_case|
-          it "#{test_case[:scenario]} #{test_case[:input]}" do
-            skip('Remove when writing functionality')
+        it "can parse complete output" do
+          tests.each do |test_case|
             cron = Cron.new(*test_case[:input])
             output = RbCronParser::Parser.parse(cron)
-
+  
             expect(output).must_equal test_case[:expected]
           end
         end
