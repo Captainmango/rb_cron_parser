@@ -9,12 +9,14 @@ module RbCronParser
   module Rules
     include RbCronParser::IntervalTotal
     # just a star (*) - returns all the possible values for the interval
-    def wildcard(_cronlet, chronounit)
+    def wildcard(cronlet, chronounit)
       case chronounit
       in IntervalTotal::MINUTE
-        return 0..IntervalTotal::MINUTE
+        return [*0..IntervalTotal::MINUTE]
       in IntervalTotal::HOUR
-        return 0..IntervalTotal::HOUR
+        return [*0..IntervalTotal::HOUR]
+      in IntervalTotal::DAY_OF_WEEK
+        return [*1..IntervalTotal::DAY_OF_WEEK]
       else
         return nil
       end
@@ -32,7 +34,7 @@ module RbCronParser
 
     # default rule (1) - returns the value passed in. Returns empty array if value is nil
     def default(cronlet, _chronounit)
-      cronlet.to_i
+      [cronlet.to_i]
     end
   end
 end

@@ -38,7 +38,7 @@ module RbCronParser
             scenario: 'Can parse wildcards',
             input: ['*', '*', '*', '*', '*'],
             expected: {
-              minute: [*0..RbCronParser::IntervalTotal::MIN],
+              minute: [*0..RbCronParser::IntervalTotal::MINUTE],
               hour: [*0..RbCronParser::IntervalTotal::HOUR],
               day_of_month: [*1..RbCronParser::IntervalTotal::DAY_OF_MONTH],
               month: [*1..RbCronParser::IntervalTotal::MONTH],

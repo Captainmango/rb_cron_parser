@@ -47,7 +47,7 @@ module RbCronParser
       #
       # Returns an array
       def parse_interval(cronlet, chronounit)
-        [*send(identify_rule(cronlet), cronlet, chronounit)]
+        send(identify_rule(cronlet), cronlet, chronounit)
       end
     end
   end
