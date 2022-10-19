@@ -55,6 +55,12 @@ module RbCronParser
             expect(output).must_equal test_case[:expected]
           end
         end
+
+        it 'raises an error if input is too big' do
+          cron = Cron.new('99-99', '*/5', '*', '99', '99,99')
+          
+          _{ RbCronParser::Parser.parse(cron) }.must_raise(ArgumentError)
+        end
       end
     end
   end

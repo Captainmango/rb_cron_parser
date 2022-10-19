@@ -10,7 +10,7 @@ module RbCronParser
   module Rules
     include RbCronParser::IntervalTotal
     # just a star (*) - returns all the possible values for the interval
-    def wildcard(cronlet, chronounit)
+    def wildcard(_cronlet, chronounit)
       case chronounit
       in IntervalTotal::MINUTE | IntervalTotal::HOUR
         [*0..chronounit]
@@ -24,6 +24,7 @@ module RbCronParser
     # 2 numbers with a dash between (1-3) - returns all values between nums inclusive
     def range(cronlet, chronounit) 
       (num1, num2) = cronlet.split('-')
+      can_apply_rule_to_numbers!(numbers: [num1.to_i, num2.to_i], chronounit: chronounit)
 
       [*num1.to_i..num2.to_i]
     end
@@ -32,6 +33,8 @@ module RbCronParser
     # must be a number or it throws error
     def modulo(cronlet, chronounit)
       (_, num) = cronlet.split('/')
+
+      can_apply_rule_to_numbers!(numbers: [num.to_i], chronounit: chronounit)
 
       case chronounit
       in IntervalTotal::MINUTE | IntervalTotal::HOUR
@@ -46,6 +49,8 @@ module RbCronParser
     # Comma separated values (1,2,3) - returns each number supplied
     def list(cronlet, chronounit)
       (num1, num2) = cronlet.split(',')
+
+      can_apply_rule_to_numbers!(numbers: [num1.to_i, num2.to_i], chronounit: chronounit)
       
       [*num1.to_i, num2.to_i]
     end
@@ -53,6 +58,14 @@ module RbCronParser
     # default rule (1) - returns the value passed in. Returns empty array if value is nil
     def default(cronlet, _chronounit)
       [cronlet.to_i]
+    end
+
+    private
+
+    def can_apply_rule_to_numbers!(**factors)
+      factors.fetch(:numbers).each do |number|
+        raise ArgumentError.new('Number too big to parse') if number > factors.fetch(:chronounit)
+      end
     end
   end
 end

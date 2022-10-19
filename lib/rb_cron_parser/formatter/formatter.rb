@@ -10,7 +10,7 @@ module RbCronParser
         raise ArgumentError.new('Formatter#format only accepts hashes') unless cron_details.is_a? Hash
 
         cron_details.each_pair do |key, value|
-          puts "#{key} #{value}"
+          puts "#{key}: #{value}"
         end
       end
     end
