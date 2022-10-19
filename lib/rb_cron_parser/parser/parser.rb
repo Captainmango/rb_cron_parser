@@ -32,10 +32,14 @@ module RbCronParser
       # Returns a symbol
       def identify_rule(cronlet)
         case cronlet
-        in /(^\*$)/
-          :wildcard
         in /(^\d{1,2}-\d{1,2}$)/
           :range
+        in /(^\d{1,2},\d{1,2}$)/
+          :list
+        in /(^\*\/\d{1,2}$)/
+          :modulo
+        in /(^\*$)/
+          :wildcard
         else
           :default
         end

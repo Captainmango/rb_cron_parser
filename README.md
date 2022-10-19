@@ -62,7 +62,7 @@ We can run the project with
 ```bash
 $ ruby main.rb [ARGUMENTS HERE]
 ```
-If you'd like to debug something, Pry is installed already. Please insert `binding.pry` where you would like to set a breakpoint and run the project or a test to halt there.
+If you'd like to debug something, Pry is installed already. Please insert `binding.pry` where you would like to set a breakpoint and run the project or tests to halt there.
 
 ## Tasks
 The test dir structure matches what is in the lib dir for ease of use. When adding or editing tests, please add these to the respective files.
@@ -78,8 +78,8 @@ The Cron class is designed to take in the input from the terminal and make it si
     - day_of_week
     - file
 
-- Write a test to confirm we can pass an array into the constructor
-    - The constructor should take each item from the array and assign to each of the variables in the following order:
+- Write a test to confirm we can pass variadic arguments into the constructor
+    - The constructor should take each item from the variadic array and assign to each of the variables in the following order:
         - minute
         - hour
         - day_of_month

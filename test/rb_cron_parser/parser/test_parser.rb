@@ -35,20 +35,19 @@ module RbCronParser
             }
           },
           {
-            scenario: 'Can parse wildcards',
-            input: ['*', '*', '*', '*', '*'],
+            scenario: 'Can parse complete input',
+            input: ['*/15', '1,12', '5', '6-12', '*', 'task.sh'],
             expected: {
-              minute: [*0..RbCronParser::IntervalTotal::MINUTE],
-              hour: [*0..RbCronParser::IntervalTotal::HOUR],
-              day_of_month: [*1..RbCronParser::IntervalTotal::DAY_OF_MONTH],
-              month: [*1..RbCronParser::IntervalTotal::MONTH],
-              day_of_week: [*1..RbCronParser::IntervalTotal::DAY_OF_WEEK],
-              file: nil
+              minute: [0, 15, 30, 45],
+              hour: [1, 12],
+              day_of_month: [5],
+              month: [*6..12],
+              day_of_week: [*1..7],
+              file: 'task.sh'
             }
-          }
+          },
         ]
         it "can parse complete output" do
-          skip('not implemented yet')
           tests.each do |test_case|
             cron = Cron.new(*test_case[:input])
             output = RbCronParser::Parser.parse(cron)

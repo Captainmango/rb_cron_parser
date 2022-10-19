@@ -30,7 +30,7 @@ module RbCronParser
         it '#modulo' do
           output = fake_parser::modulo('*/2', interval)
 
-          expect(output).must_equal [0,2,3,6]
+          expect(output).must_equal [2,4,6]
         end
 
         it '#list' do
