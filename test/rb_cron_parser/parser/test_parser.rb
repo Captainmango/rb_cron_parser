@@ -45,21 +45,21 @@ module RbCronParser
               day_of_week: [*1..7],
               file: 'task.sh'
             }
-          },
+          }
         ]
-        it "can parse complete output" do
+        it 'can parse complete output' do
           tests.each do |test_case|
             cron = Cron.new(*test_case[:input])
             output = RbCronParser::Parser.parse(cron)
-  
+
             expect(output).must_equal test_case[:expected]
           end
         end
 
         it 'raises an error if input is too big' do
           cron = Cron.new('99-99', '*/5', '*', '99', '99,99')
-          
-          _{ RbCronParser::Parser.parse(cron) }.must_raise(ArgumentError)
+
+          _ { RbCronParser::Parser.parse(cron) }.must_raise(ArgumentError)
         end
       end
     end

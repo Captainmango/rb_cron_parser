@@ -36,7 +36,7 @@ module RbCronParser
           :range
         in /(^\d{1,2},\d{1,2}$)/
           :list
-        in /(^\*\/\d{1,2}$)/
+        in %r{(^\*/\d{1,2}$)}
           :modulo
         in /(^\*$)/
           :wildcard

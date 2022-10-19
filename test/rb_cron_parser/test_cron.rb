@@ -6,7 +6,7 @@ require 'rb_cron_parser'
 module RbCronParser
   class CronTest < Minitest::Spec
     describe 'RbCronParser::Cron' do
-      let(:cron) { Cron.new(1,2,3,4,5,'thing.js') }
+      let(:cron) { Cron.new(1, 2, 3, 4, 5, 'thing.js') }
 
       it 'can get the minute' do
         expect(cron.minute).must_equal 1

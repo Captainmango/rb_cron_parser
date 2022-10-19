@@ -22,7 +22,7 @@ module RbCronParser
     end
 
     # 2 numbers with a dash between (1-3) - returns all values between nums inclusive
-    def range(cronlet, chronounit) 
+    def range(cronlet, chronounit)
       (num1, num2) = cronlet.split('-')
       can_apply_rule_to_numbers!(numbers: [num1.to_i, num2.to_i], chronounit: chronounit)
 
@@ -38,9 +38,9 @@ module RbCronParser
 
       case chronounit
       in IntervalTotal::MINUTE | IntervalTotal::HOUR
-        [*0..chronounit].select {|number| number % num.to_i == 0 }
+        [*0..chronounit].select { |number| (number % num.to_i).zero? }
       in IntervalTotal::DAY_OF_WEEK | IntervalTotal::MONTH | IntervalTotal::DAY_OF_MONTH
-        [*1..chronounit].select {|number| number % num.to_i == 0 }
+        [*1..chronounit].select { |number| (number % num.to_i).zero? }
       else
         []
       end
@@ -51,7 +51,7 @@ module RbCronParser
       (num1, num2) = cronlet.split(',')
 
       can_apply_rule_to_numbers!(numbers: [num1.to_i, num2.to_i], chronounit: chronounit)
-      
+
       [*num1.to_i, num2.to_i]
     end
 
@@ -64,7 +64,7 @@ module RbCronParser
 
     def can_apply_rule_to_numbers!(**factors)
       factors.fetch(:numbers).each do |number|
-        raise ArgumentError.new('Number too big to parse') if number > factors.fetch(:chronounit)
+        raise ArgumentError, 'Number too big to parse' if number > factors.fetch(:chronounit)
       end
     end
   end
