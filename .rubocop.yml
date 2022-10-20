@@ -18,3 +18,6 @@ Metrics/BlockLength:
 # Purely style related, but line lengths in Ruby aren't generally this long
 Layout/LineLength:
   Max: 120
+
+Metrics/MethodLength:
+  Max: 20

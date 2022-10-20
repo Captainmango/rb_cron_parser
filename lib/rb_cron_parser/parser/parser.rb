@@ -17,14 +17,16 @@ module RbCronParser
       #
       # Returns a hash
       def parse(cron)
-        {
-          minute: parse_interval(cron.minute, IntervalTotal::MINUTE),
-          hour: parse_interval(cron.hour, IntervalTotal::HOUR),
-          day_of_month: parse_interval(cron.day_of_month, IntervalTotal::DAY_OF_MONTH),
-          month: parse_interval(cron.month, IntervalTotal::MONTH),
-          day_of_week: parse_interval(cron.day_of_week, IntervalTotal::DAY_OF_WEEK),
-          file: cron.file
-        }
+        parsed_cron = %i[
+          minute
+          hour
+          day_of_month
+          month
+          day_of_week
+        ].to_h { |var| [var, parse_interval(cron.send(var), IntervalTotal.const_get(var.to_s.upcase))] }
+
+        parsed_cron[:file] = cron.file
+        parsed_cron
       end
 
       # Identifies what rule to apply to the cron fragment
