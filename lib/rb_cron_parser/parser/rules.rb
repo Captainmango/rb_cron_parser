@@ -49,11 +49,11 @@ module RbCronParser
 
     # Comma separated values (1,2,3) - returns each number supplied
     def list(cronlet, chronounit)
-      (num1, num2) = cronlet.split(',')
+      nums = cronlet.split(',').map{|num| num.to_i}
 
-      can_apply_rule_to_numbers!(numbers: [num1.to_i, num2.to_i], chronounit: chronounit)
+      can_apply_rule_to_numbers!(numbers: nums, chronounit: chronounit)
 
-      [*num1.to_i, num2.to_i]
+      nums
     end
 
     # default rule (1) - returns the value passed in. Returns empty array if value is nil
