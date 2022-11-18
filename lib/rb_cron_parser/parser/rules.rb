@@ -24,6 +24,7 @@ module RbCronParser
     # 2 numbers with a dash between (1-3) - returns all values between nums inclusive
     def range(cronlet, chronounit)
       (num1, num2) = cronlet.split('-')
+
       can_apply_rule_to_numbers!(numbers: [num1.to_i, num2.to_i], chronounit: chronounit)
 
       [*num1.to_i..num2.to_i]
@@ -56,7 +57,9 @@ module RbCronParser
     end
 
     # default rule (1) - returns the value passed in. Returns empty array if value is nil
-    def default(cronlet, _chronounit)
+    def default(cronlet, chronounit)
+      return cronlet if chronounit == -1
+
       [cronlet.to_i]
     end
 

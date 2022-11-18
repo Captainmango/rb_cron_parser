@@ -24,26 +24,26 @@ module RbCronParser
         tests = [
           {
             scenario: 'Can parse basic input',
-            input: [1, 2, 3, 4, 5],
+            input: ['1', '2', '3', '4', '5', nil],
             expected: {
               minute: [1],
               hour: [2],
               day_of_month: [3],
               month: [4],
               day_of_week: [5],
-              file: nil
+              filepath: nil
             }
           },
           {
             scenario: 'Can parse complete input',
-            input: ['*/15', '1,12', '5', '6-12', '*', 'task.sh'],
+            input: ['*/15', '1,12', '5', '6-12', '*', './task.sh'],
             expected: {
               minute: [0, 15, 30, 45],
               hour: [1, 12],
               day_of_month: [5],
               month: [*6..12],
               day_of_week: [*1..7],
-              file: 'task.sh'
+              filepath: './task.sh'
             }
           }
         ]
