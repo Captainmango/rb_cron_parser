@@ -1,0 +1,162 @@
+# 
+# @attr_reader [String] hour
+# @attr_reader day_of_month [String]
+# @attr_reader month [String]
+# @attr_reader day_of_week [String]
+# @attr_reader filepath [String]
+module RbCronParser
+  # Value object containing cronpieces
+  class Cron
+    # Constructor for Cron
+    # 
+    # _@param_ `*args` — Command line arguments parsed into an array
+    def initialize: (*::Array[String] args) -> void
+
+    # sord omit - no YARD type given for :minute, using untyped
+    # Returns the value of attribute minute.
+    attr_reader minute: untyped
+
+    # sord omit - no YARD type given for :hour, using untyped
+    # Returns the value of attribute hour.
+    attr_reader hour: untyped
+
+    # sord omit - no YARD type given for :day_of_month, using untyped
+    # Returns the value of attribute day_of_month.
+    attr_reader day_of_month: untyped
+
+    # sord omit - no YARD type given for :month, using untyped
+    # Returns the value of attribute month.
+    attr_reader month: untyped
+
+    # sord omit - no YARD type given for :day_of_week, using untyped
+    # Returns the value of attribute day_of_week.
+    attr_reader day_of_week: untyped
+
+    # sord omit - no YARD type given for :filepath, using untyped
+    # Returns the value of attribute filepath.
+    attr_reader filepath: untyped
+  end
+
+  # Module containing rules for processing cron fragments
+  # 
+  # Author: Edward Heaver
+  module Rules
+    include RbCronParser::IntervalTotal
+
+    # sord omit - no YARD type given for "_cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # just a star (*) - returns all the possible values for the interval
+    def wildcard: (untyped _cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # 2 numbers with a dash between (1-3) - returns all values between nums inclusive
+    def range: (untyped cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # star with / and any number (*/10) - returns all that are divisible by right side number
+    # must be a number or it throws error
+    def modulo: (untyped cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # Comma separated values (1,2,3) - returns each number supplied
+    def list: (untyped cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # default rule (1) - returns the value passed in. Returns empty array if value is nil
+    def default: (untyped cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "**factors", using untyped
+    # sord omit - no YARD return type given, using untyped
+    def can_apply_rule_to_numbers!: (**untyped factors) -> untyped
+  end
+
+  # Module to parse cron fragments into possible values
+  # 
+  # Author: Edward Heaver
+  module Parser
+    extend RbCronParser::IntervalTotal
+    extend RbCronParser::Rules
+
+    # Returns the parsed cron
+    # 
+    # _@param_ `cron` — the cron expression
+    # 
+    # _@return_ — the parsed expression
+    def self.parse: (::Hash[untyped, untyped] cron) -> ::Array[untyped]
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD return type given, using untyped
+    def self.identify_rule: (untyped cronlet) -> untyped
+
+    # parse the cronlet supplied in respect of the chronounit
+    # 
+    # _@param_ `cronlet` — the piece of the cron
+    # 
+    # _@param_ `chronounit` — the chronounit
+    def self.parse_interval: (::Hash[untyped, untyped] cronlet, Integer chronounit) -> ::Array[untyped]
+
+    # sord omit - no YARD type given for "_cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # just a star (*) - returns all the possible values for the interval
+    def self.wildcard: (untyped _cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # 2 numbers with a dash between (1-3) - returns all values between nums inclusive
+    def self.range: (untyped cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # star with / and any number (*/10) - returns all that are divisible by right side number
+    # must be a number or it throws error
+    def self.modulo: (untyped cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # Comma separated values (1,2,3) - returns each number supplied
+    def self.list: (untyped cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "cronlet", using untyped
+    # sord omit - no YARD type given for "chronounit", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # default rule (1) - returns the value passed in. Returns empty array if value is nil
+    def self.default: (untyped cronlet, untyped chronounit) -> untyped
+
+    # sord omit - no YARD type given for "**factors", using untyped
+    # sord omit - no YARD return type given, using untyped
+    def self.can_apply_rule_to_numbers!: (**untyped factors) -> untyped
+  end
+
+  # Module to format parser output into a nice looking table
+  # 
+  # Author: Edward Heaver
+  module Formatter
+    # sord omit - no YARD type given for "cron_details", using untyped
+    # sord omit - no YARD return type given, using untyped
+    def self.format: (untyped cron_details) -> untyped
+  end
+
+  # Constants for max values of the intervals used by the program
+  # 
+  # Author: Edward Heaver
+  module IntervalTotal
+    DAY_OF_MONTH: Integer
+    MINUTE: Integer
+    HOUR: Integer
+    DAY_OF_WEEK: Integer
+    MONTH: Integer
+  end
+end

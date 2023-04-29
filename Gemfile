@@ -10,3 +10,11 @@ gem 'minitest-reporters'
 gem 'rubocop', '~> 1.21'
 
 gem 'pry'
+
+group :development do
+    gem 'readapt'
+    gem 'steep'
+    gem 'sord'
+    gem 'solargraph'
+end
+

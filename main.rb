@@ -5,10 +5,15 @@ require './lib/rb_cron_parser'
 
 input = ARGV.join(' ').split(' ')
 
+puts "hello"
+
 raise ArgumentError, 'Incorrect size cron passed in' if input.length > 6
 
-cron = Cron.new(*input)
+# @param cron [RbCronParser::Cron]
+cron = RbCronParser::Cron.new(*input)
+cron.test2
 
 RbCronParser::Formatter.format(
   RbCronParser::Parser.parse(cron)
 )
+ 

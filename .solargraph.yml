@@ -1,12 +1,12 @@
----
 include:
-- "**/*.rb"
+- "lib/**/*.rb"
+- "main.rb"
 exclude:
 - spec/**/*
 - test/**/*
 - vendor/**/*
 - ".bundle/**/*"
-- "Gemfile.lock"
+- Gemfile.lock
 require: []
 domains: []
 reporters:
@@ -15,7 +15,8 @@ reporters:
 formatter:
   rubocop:
     cops: safe
-    except: []
+    except:
+    - Gemfile.lock
     only: []
     extra_args: []
 require_paths: []

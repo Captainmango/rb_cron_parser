@@ -13,10 +13,15 @@ module RbCronParser
       include RbCronParser::Rules
       include RbCronParser::IntervalTotal
 
-      # Converts the cron object into a collection of parsed intervals with rules applied
       #
-      # Returns a hash
-      def parse(cron)
+      # Returns the parsed cron
+      #
+      # @param cron [Hash] the cron expression
+      #
+      # @return [Array] the parsed expression
+      #
+      def parse(cron) 
+        # @param var [Hash]
         %i[
           minute
           hour
@@ -26,7 +31,6 @@ module RbCronParser
           filepath
         ].to_h do |var|
           chronounit = -1 # default when not matching any interval
-
           chronounit = IntervalTotal.const_get(var.to_s.upcase) if IntervalTotal.constants.include?(var.upcase)
 
           [var, parse_interval(cron.send(var), chronounit)]
@@ -34,10 +38,7 @@ module RbCronParser
 
         # parsed_cron[:filepath] = cron.filepath
       end
-
-      # Identifies what rule to apply to the cron fragment
-      #
-      # Returns a symbol
+      
       def identify_rule(cronlet)
         case cronlet
         in /(^\d{1,2}-\d{1,2}$)/
@@ -57,9 +58,15 @@ module RbCronParser
 
       private
 
-      # Accepts cron fragment and interval and applies identified rule
+
       #
-      # Returns an array
+      # parse the cronlet supplied in respect of the chronounit
+      #
+      # @param [Hash] cronlet the piece of the cron
+      # @param [Integer] chronounit the chronounit
+      #
+      # @return [Array]
+      #
       def parse_interval(cronlet, chronounit)
         rule = identify_rule(cronlet)
 
